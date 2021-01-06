@@ -6,7 +6,7 @@ USE employee_tracker;
 
 CREATE TABLE department
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(30) NULL,
     PRIMARY KEY(id)
 );
@@ -14,7 +14,7 @@ CREATE TABLE department
 
 CREATE TABLE role
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30) NULL,
     salary DECIMAL NULL,
     department_id INT NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE role
 
 CREATE TABLE employee
 (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30) NULL,
     last_name VARCHAR(30) NULL,
     role_id INT NOT NULL,
@@ -32,8 +32,13 @@ CREATE TABLE employee
 );
 
 
-INSERT INTO department (id, name) VALUES  ("vanilla", 2.50, 100);
+INSERT INTO department (name) 
+VALUES  ("IT");
 
-INSERT INTO role (id, title, salary, department_id) VALUES ("chocolate", 3.10, 120);
+INSERT INTO role (title, salary, department_id) 
+VALUES ("Sr_Developer", 100, 2);
 
-INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES ("strawberry", 3.25, 75);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) 
+VALUES ("Afam", "Anekeh", 10, 1);
+
+SELECT * FROM employee_tracker.employee;
