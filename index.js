@@ -25,6 +25,7 @@ connection.connect((err) => {
   console.log('connected as id ' + connection.threadId);
   // addDept();
   // addEmp();
+  // addRole();
   // viewDept();
   // viewRole();
   // viewEmp();
@@ -41,29 +42,29 @@ function startApp() {
     message: "What would you like to do?",
     choices: [
       "Add department",
-      "Ddd role?",
-      "Ddd employee?",
+      "Add role",
+      "Add employee",
       "View employees",
       "View departments",
       "View roles",
       "Update employee roles",
-      "exit"
+      "Exit"
     ]
 
      
   })
   .then(function(answer) {
     switch (answer.action) {
-      case "Add departments":
+      case "Add department":
       addDept();
       break;
 
       case "Add role":
-      addDept();
+      addRole();
       break;
 
       case "Add employee":
-      addDept();
+      addEmp();
       break;
 
       case "View employees":
@@ -82,40 +83,127 @@ function startApp() {
         updateEmpRole();
         break;
       
+      case "exit":
+        connection.end();
+        break;
+      
     }
   });
 }
 
 
-// async function addDept() {
-//   inquirer.prompt({
-//     name: ""
+function addDept() {
+  inquirer.prompt({
+    name: "department",
+    type: "input",
+    message: "What is the name of your department"
+  })
+  .then(function({department}) {
+   
+    const SQL_STATEMENT = `INSERT INTO department SET ?`;
+    connection.query(SQL_STATEMENT, {name: department}, function(err, res) {
+      if(err) throw err;
+      console.log("department added");
+      startApp();
+    });    
 
+  })     
 
+}
 
-//   })
-
-
-
-//     const SQL_STATEMENT = `INSERT INTO department (name) 
-//     VALUES ("Legal"), `;
-//     const [rows, fields] = await connection.promise().query(SQL_STATEMENT);
-    
-//     console.log(rows);
-    
-
-// }
-
-// async function addEmp() {
-
-//   const SQL_STATEMENT = `INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-//   VALUES ("Ifunanya", "Anekeh", 13, 3); `;
-//   const [rows, fields] = await connection.promise().query(SQL_STATEMENT);
+function addEmp() {
   
-//   console.log("it added again");
+  inquirer.prompt([
+    {
+      name: "firstName",
+      type: "input",
+      message: "What is your first name?"
+    },
+
+    {
+      name: "lastName",
+      type: "input",
+      message: "What is your last name?"
+    },
+
+    {
+      name: "roleId",
+      type: "input",
+      message: "What is your role id?"
+    },
+
+    {
+      name: "managerId",
+      type: "input",
+      message: "What is your manager's id?"
+    },
+  
+  ]).then(function({firstName, lastName, roleId, managerId}) {
+
+    const SQL_STATEMENT = `INSERT INTO employee SET ?`; 
+    connection.query(SQL_STATEMENT, {first_name: firstName, last_name: lastName, role_id: roleId, manager_id: managerId}, 
+    function(err) {
+    if(err) throw err;
+    console.log("employee added");
+    startApp();
+  }); 
+
+  }) 
   
 
-// }
+}
+
+function addRole() {
+
+  inquirer.prompt([
+    {
+      name: "title",
+      type: "input",
+      message: "What is your title?"
+    },
+
+    {
+      name: "salary",
+      type: "input",
+      message: "What is your salary?"
+    },
+
+    {
+      name: "dept_id",
+      type: "input",
+      message: "What is your department id?"
+    }
+
+  ]).then(function({title, salary, dept_id}) {
+    const SQL_STATEMENT = `INSERT INTO role SET ?`; 
+    connection.query(SQL_STATEMENT, {title: title, salary: salary, department_id: dept_id}, function(err,) {
+      if(err) throw err;
+      console.log("Role added");
+      startApp();
+
+    });
+
+  });
+
+  // inquirer.prompt({
+  //   name: "department",
+  //   type: "input",
+  //   message: "What is the name of your department"
+  // })
+  // .then(function({department}) {
+   
+  //   const SQL_STATEMENT = `INSERT INTO department SET ?`;
+  //   connection.query(SQL_STATEMENT, {name: department}, function(err, res) {
+  //     if(err) throw err;
+  //     console.log("department added");
+  //     startApp();
+  //   });    
+
+  // }) 
+
+
+
+}
 
 
 // Function for viewing employee, role and department
@@ -127,6 +215,7 @@ async function viewDept() {
   const [rows, fields] = await connection.promise().query(SQL_STATEMENT);
     
   console.table(rows);
+  startApp();
 }
 
 async function viewRole() {
@@ -136,6 +225,7 @@ async function viewRole() {
   const [rows, fields] = await connection.promise().query(SQL_STATEMENT);
     
   console.table(rows);
+  startApp();
 }
 
 async function viewEmp() { 
@@ -149,12 +239,4 @@ async function viewEmp() {
 }
 
 
-// function readProducts() {
-//   console.log("Selecting all products...\n");
-//   connection.query("SELECT * FROM products", function(err, res) {
-//     if (err) throw err;
-//     // Log all results of the SELECT statement
-//     console.log(res);
-//     connection.end();
-//   });
-// }
+
