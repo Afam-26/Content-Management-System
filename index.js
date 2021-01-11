@@ -2,6 +2,16 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 
+// Import Constants Choice Variables
+const [ADD_DEPARTMENT, ADD_ROLE, ADD_EMPLOYEE, VIEW_EMPLOYEES, VIEW_DEPARTMENTS, VIEW_ROLES, UPDATE_EMPLOYEE_ROLES,] = require('./lib/const');
+
+// Import Prompt Functions
+const {promptChoices, addDept, addRole, addEmp} = require('./lib/prompt');
+
+// Import Query Functions
+const {viewEmp, viewRole, viewDept, addDept, addEmp, addRole, updateEmpRole} = require('./lib/query');
+
+
 // Connect to the ice_creamDB database using a localhost connection
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -20,11 +30,11 @@ const connection = mysql.createConnection({
 });
 
 // Function for server connection
-connection.connect((err) => {
+connection.connect(async (err) => {
   if (err) throw err;
   console.log('connected as id ' + connection.threadId);  
-  startApp();
-  // connection.end();
+  await startApp();
+  connection.end();
   
 });
 
