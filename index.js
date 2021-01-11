@@ -22,13 +22,7 @@ const connection = mysql.createConnection({
 // Function for server connection
 connection.connect((err) => {
   if (err) throw err;
-  console.log('connected as id ' + connection.threadId);
-  // addDept();
-  // addEmp();
-  // addRole();
-  // viewDept();
-  // viewRole();
-  // viewEmp();
+  console.log('connected as id ' + connection.threadId);  
   startApp();
   // connection.end();
   
@@ -185,23 +179,6 @@ function addRole() {
 
   });
 
-  // inquirer.prompt({
-  //   name: "department",
-  //   type: "input",
-  //   message: "What is the name of your department"
-  // })
-  // .then(function({department}) {
-   
-  //   const SQL_STATEMENT = `INSERT INTO department SET ?`;
-  //   connection.query(SQL_STATEMENT, {name: department}, function(err, res) {
-  //     if(err) throw err;
-  //     console.log("department added");
-  //     startApp();
-  //   });    
-
-  // }) 
-
-
 
 }
 
@@ -238,5 +215,49 @@ async function viewEmp() {
   connection.end();
 }
 
+async function updateEmpRole() {
+
+  console.log("Employee table");
+  const SQL_STATEMENT = `SELECT * FROM employee_tracker.employee;`;
+  const [rows, fields] = await connection.promise().query(SQL_STATEMENT);
+    
+  console.table(rows);
 
 
+
+  inquirer.prompt({
+    name: "employee",
+    type: "input",
+    message: "Which employee do you want to update their role, enter their firstname?",
+    validate: function(value) {
+      if (value === firstName);
+    }
+  }).then(function(answer) {
+    const SQL_STATEMENT = `INSERT INTO employee SET ?`;
+
+  })
+
+
+  // .then(function({department}) {
+   
+  //   const SQL_STATEMENT = `INSERT INTO department SET ?`;
+  //   connection.query(SQL_STATEMENT, {name: department}, function(err, res) {
+  //     if(err) throw err;
+  //     console.log("department added");
+  //     startApp();
+  //   });    
+
+  // })  
+
+}
+
+
+async function viewEmp() { 
+
+  console.log("Employee table");
+  const SQL_STATEMENT = `SELECT * FROM employee_tracker.employee;`;
+  const [rows, fields] = await connection.promise().query(SQL_STATEMENT);
+    
+  console.table(rows);
+  connection.end();
+}
