@@ -89,8 +89,15 @@ function startApp() {
 function addDept() {
   inquirer.prompt({
     name: "department",
-    type: "input",
-    message: "What is the name of your department"
+    type: "list",
+    message: "What is the name of your department",
+    choices: 
+    [
+      "IT",
+      "Legal",
+      "Sales",
+      "Marketing"
+    ]
   })
   .then(function({department}) {
    
@@ -152,8 +159,16 @@ function addRole() {
   inquirer.prompt([
     {
       name: "title",
-      type: "input",
-      message: "What is your title?"
+      type: "list",
+      message: "What is your title?",
+      choices:
+      [
+        "Sr Web Developer",
+        "Software Engineer",
+        "Sales Manager",
+        "Lead Engineer",
+        "Marketing Manager"
+      ]
     },
 
     {
