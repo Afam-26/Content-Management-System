@@ -6,7 +6,7 @@ const inquirer = require('inquirer');
 const [ADD_DEPARTMENT, ADD_ROLE, ADD_EMPLOYEE, VIEW_EMPLOYEES, VIEW_DEPARTMENTS, VIEW_ROLES, UPDATE_EMPLOYEE_ROLES] = require('./lib/const');
 
 // Import Prompt Functions
-const {promptChoices, promptAddDept, promptAddRole, promptAddEmp, promptEmpQues, promptUpdateEmpRole, promptUpdateManager} = require('./lib/prompt');
+const {promptChoices, promptAddDept, promptAddRole, promptAddEmp, promptEmpQues, promptUpdateEmpRole, promptUpdateManager, promptAddEmpRole} = require('./lib/prompt');
 
 // Import Query Functions
 const {viewEmp, viewRole, viewDept, addDept, addEmp, addRole, updateEmpRole, updateManager} = require('./lib/query');
@@ -85,20 +85,22 @@ async function startApp() {
       break;
 
     case UPDATE_EMPLOYEE_ROLES:
-      empQues = await promptEmpQues(connection);
+      empQues = await promptEmpQues();
       if(empQues.name === "Role ID"){
         await viewEmp(connection);
         employee = await promptUpdateEmpRole();
-        await updateEmpRole(connection, employee.employeeID, employee.role_id);
-      
+        await viewRole(connection);
+        role = await promptAddEmpRole();
+        await updateEmpRole(connection, role.id, employee.id);
+        await viewEmp(connection);      
         await startApp();
-        break;
-
-      } else if(empQues.name === "Manager ID") {
+       
+      }
+      if(empQues.name === "Manager ID") {
         await viewEmp(connection);
         manager = await promptUpdateManager();
         await updateManager(connection, manager.id, manager.id)
-        
+
         await startApp();
         break;
 
