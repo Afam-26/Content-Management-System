@@ -98,8 +98,11 @@ async function startApp() {
       }
       if(empQues.name === "Manager ID") {
         await viewEmp(connection);
+        employee = await promptUpdateEmpRole();
+        await viewEmp(connection);        
         manager = await promptUpdateManager();
-        await updateManager(connection, manager.id, manager.id)
+        await updateManager(connection, manager.id, employee.id)
+        await viewEmp(connection);
 
         await startApp();
         break;

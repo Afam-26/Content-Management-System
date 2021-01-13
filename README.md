@@ -22,11 +22,13 @@ This is a node application that makes it easy for company to manage employee acc
 
 ## Screenshot
 
-![Front page](./Assets/screen.png)
+![Front page](./assets/role.png)
 
-![video](./Assets/video.gif)
+![Front page](./assets/employee.png)
 
-[Click here for the video link](https://drive.google.com/file/d/1RcjjD1PbhnY3YUgCnWuKPwj4emH-zcXn/view?usp=sharing)
+![video](./assets/video.gif)
+
+[Click here for the video link](https://drive.google.com/file/d/1v0_m5qBjAkHcLmp_DahT-S7FSrtO4Qx7/view?usp=sharing)
 
  
 ## Contacts Info
