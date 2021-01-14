@@ -71,7 +71,7 @@ async function startApp() {
     case ADD_ROLE:
       await viewRole(connection);
       role = await promptAddRole();
-      addRole(connection, role.title, role.salary, role.department_id)
+      addRole(connection, role.title, role.salary, role.dept_id)
       await viewRole(connection);
       await startApp();
       break;
@@ -79,7 +79,7 @@ async function startApp() {
     case ADD_EMPLOYEE:
       await viewEmp(connection)
       employee = await promptAddEmp();
-      addEmp(connection, employee.first_name, employee.last_name, employee.role_id, employee.manager_id);
+      addEmp(connection, employee.firstName, employee.lastName, employee.roleId, employee.managerId);
       await viewEmp(connection);
       await startApp();
       break;
