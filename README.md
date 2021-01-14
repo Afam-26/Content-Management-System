@@ -15,7 +15,7 @@ This is a node application that makes it easy for company to manage employee acc
 
 ## Installation 
 
-1. Clone the repo: https://github.com/Afam-26/ReadMe-Generator.git
+1. Clone the repo: https://github.com/Afam-26/Content-Management-System.git
 2. Install NPM packages: npm i inquirer, MySQL
 3. To run program: node index.js
 

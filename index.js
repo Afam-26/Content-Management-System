@@ -62,8 +62,8 @@ async function startApp() {
 
     case ADD_DEPARTMENT:
       await viewDept(connection);
-      department = await promptAddDept();
-      addDept(connection, department.name);
+      department = await promptAddDept();      
+      addDept(connection, department.department);
       await viewDept(connection);
       await startApp();
       break;
