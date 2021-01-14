@@ -38,6 +38,7 @@ connection.connect(async (err) => {
   
 });
 
+// Function for switch statements
 async function startApp() {
 
   let answer, employee, role, department, empQues;
@@ -48,7 +49,7 @@ async function startApp() {
     case VIEW_EMPLOYEES:
       await viewEmp(connection);
       await startApp();
-      break;
+      break; 
     
     case VIEW_DEPARTMENTS:
       await viewDept(connection);
