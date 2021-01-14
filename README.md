@@ -37,9 +37,9 @@ Please reach out to me if you have any questions.
 
 Email: afam262@gmail.com
 
-Github Username: https://afam-26.github.io/
+Github Username: Afam-26
 
-[Github link]() 
+[Github link](https://github.com/Afam-26/Content-Management-System.git) 
 
 
 ## Programming-Language 
